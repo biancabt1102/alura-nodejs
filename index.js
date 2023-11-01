@@ -1,6 +1,18 @@
-//const chalk = require('chalk');
+import fs from 'fs';
 import chalk from "chalk";
 
-console.log(chalk.blue('olá mundo'));
-console.log('São geralmente recuperados a partir de um objeto [FileList](https://developer.mozilla.org/pt-BR/docs/Web/API/FileList)');
-console.log('São geralmente recuperados a partir de um objeto [FileList](https://developer.mozilla.org/pt-BR/docs/Web/API/FileList)');
+function trataErro(erro){
+    throw new Error(chalk.red(erro.code, 'não há arquivo no diretório'));
+}
+
+async function pegaArquivo(caminhoDoArquivo){
+    try {
+        const encoding = 'utf-8';
+        const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
+        console.log(chalk.green(texto));
+    } catch(erro) {
+        trataErro(erro);
+    }
+}
+
+pegaArquivo('./arquivos/texto.md');
