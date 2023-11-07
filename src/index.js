@@ -12,7 +12,7 @@ function trataErro(erro){
     throw new Error(chalk.red(erro.code, 'não há arquivo no diretório'));
 }
 
-async function pegaArquivo(caminhoDoArquivo){
+export default async function pegaArquivo(caminhoDoArquivo){
     try {
         const encoding = 'utf-8';
         const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
@@ -21,5 +21,3 @@ async function pegaArquivo(caminhoDoArquivo){
         trataErro(erro);
     }
 }
-
-export default pegaArquivo;
